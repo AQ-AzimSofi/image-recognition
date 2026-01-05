@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+.env
+
+# YOLO model weights (downloaded automatically)
+*.pt
+
+# Test images (add your own)
+images/input/*
+!images/input/.gitkeep
+
+# Output files
+images/output/*
+!images/output/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+/private
+/.history
+CLAUDE.md
