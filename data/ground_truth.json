@@ -1,0 +1,37 @@
+{
+    "description": "Ground truth data for YOLO detection accuracy testing",
+    "source_video": "private-data/TLC00046.AVI",
+    "instructions": [
+        "1. View each image in images/input/",
+        "2. Manually count the number of workers/persons in each image",
+        "3. Update the 'actual_count' field for each entry (replace null with the count)",
+        "4. Add any relevant notes about the image (occlusion, lighting, etc.)",
+        "5. Run: python src/accuracy.py"
+    ],
+    "images": [
+        {"image": "frame_01.jpg", "actual_count": null, "notes": "Minute 1"},
+        {"image": "frame_02.jpg", "actual_count": null, "notes": "Minute 2"},
+        {"image": "frame_03.jpg", "actual_count": null, "notes": "Minute 3"},
+        {"image": "frame_04.jpg", "actual_count": null, "notes": "Minute 4"},
+        {"image": "frame_05.jpg", "actual_count": null, "notes": "Minute 5"},
+        {"image": "frame_06.jpg", "actual_count": null, "notes": "Minute 6"},
+        {"image": "frame_07.jpg", "actual_count": null, "notes": "Minute 7"},
+        {"image": "frame_08.jpg", "actual_count": null, "notes": "Minute 8"},
+        {"image": "frame_09.jpg", "actual_count": null, "notes": "Minute 9"},
+        {"image": "frame_10.jpg", "actual_count": null, "notes": "Minute 10"},
+        {"image": "frame_11.jpg", "actual_count": null, "notes": "Minute 11"},
+        {"image": "frame_12.jpg", "actual_count": null, "notes": "Minute 12"},
+        {"image": "frame_13.jpg", "actual_count": null, "notes": "Minute 13"},
+        {"image": "frame_14.jpg", "actual_count": null, "notes": "Minute 14"},
+        {"image": "frame_15.jpg", "actual_count": null, "notes": "Minute 15"},
+        {"image": "frame_16.jpg", "actual_count": null, "notes": "Minute 16"},
+        {"image": "frame_17.jpg", "actual_count": null, "notes": "Minute 17"},
+        {"image": "frame_18.jpg", "actual_count": null, "notes": "Minute 18"},
+        {"image": "frame_19.jpg", "actual_count": null, "notes": "Minute 19"},
+        {"image": "frame_20.jpg", "actual_count": null, "notes": "Minute 20"},
+        {"image": "frame_21.jpg", "actual_count": null, "notes": "Minute 21"},
+        {"image": "frame_22.jpg", "actual_count": null, "notes": "Minute 22"},
+        {"image": "frame_23.jpg", "actual_count": null, "notes": "Minute 23"},
+        {"image": "frame_24.jpg", "actual_count": null, "notes": "Minute 24"}
+    ]
+}
