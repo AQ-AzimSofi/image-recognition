@@ -9,16 +9,31 @@ env/
 .venv/
 .env
 
-# YOLO model weights (downloaded automatically)
-*.pt
+# Model weights
+models/*.pt
+models/*.pth
+models/*.onnx
 
-# Test images (add your own)
+# Input images (add your own)
 images/input/*
 !images/input/.gitkeep
 
 # Output files
 images/output/*
 !images/output/.gitkeep
+
+# Data directories
+data/*
+!data/.gitkeep
+!data/ground_truth.json
+
+# Training runs
+runs/*
+!runs/.gitkeep
+
+# Reports (generated)
+reports/*
+!reports/.gitkeep
 
 # IDE
 .vscode/
