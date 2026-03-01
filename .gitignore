@@ -9,12 +9,7 @@ env/
 .venv/
 .env
 
-# Model weights
-models/*.pt
-models/*.pth
-models/*.onnx
-
-# Input images (add your own)
+# Input images
 images/input/*
 !images/input/.gitkeep
 
@@ -25,11 +20,9 @@ images/output/*
 # Data directories
 data/*
 !data/.gitkeep
-!data/ground_truth.json
 
-# Training runs
-runs/*
-!runs/.gitkeep
+# SQLite database
+*.db
 
 # Reports (generated)
 reports/*
