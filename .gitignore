@@ -38,6 +38,20 @@ reports/*
 .DS_Store
 Thumbs.db
 
+# Node.js / TypeScript
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Environment
+.env.development
+.env.local
+.env.production
+
+# Drizzle
+db/migrations/
+
 # Misc
 /private
 /.history

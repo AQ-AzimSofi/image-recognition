@@ -1,0 +1,29 @@
+{
+  "name": "image-recognition",
+  "version": "1.0.0",
+  "description": "AWS Rekognition object detection POC with Mastra AI agent",
+  "scripts": {
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "mastra:dev": "cross-env ENVIRONMENT=local turbo -F app dev",
+    "mastra:build": "turbo -F app build",
+    "mastra:test": "turbo -F app test -- --run",
+    "db:generate": "turbo -F @repo/db db:generate",
+    "db:push": "turbo -F @repo/db db:push",
+    "db:studio": "turbo -F @repo/db db:studio",
+    "db:migrate": "turbo -F @repo/db db:migrate"
+  },
+  "workspaces": [
+    "app",
+    "db"
+  ],
+  "packageManager": "npm@10.9.3",
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "turbo": "^2.6.3"
+  },
+  "dependencies": {
+    "zod": "^4.1.12"
+  }
+}
