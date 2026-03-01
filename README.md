@@ -1,99 +1,94 @@
-# YOLO Person Detection for Construction Sites
+# Object Detection Kaizen System
 
-Person detection system using YOLO for counting workers on construction sites from static images.
+AWS Rekognition-based object detection system with mislabel analysis and stress testing for office and construction site environments.
 
 ## Setup
 
 ```bash
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
 
-# Install dependencies
 pip install -r requirements.txt
 ```
 
+### AWS Credentials
+
+Configure AWS credentials via one of:
+- Environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`
+- AWS credentials file: `~/.aws/credentials`
+- IAM role (if running on AWS infrastructure)
+
 ## Usage
 
-### Detect persons in images
+### Run both API server and Gradio UI
 
 ```bash
-# Single image
-python src/detect.py images/input/photo.jpg
-
-# Directory of images (with annotated output)
-python src/detect.py images/input/online/ --save
-
-# Adjust confidence threshold
-python src/detect.py images/input/ --confidence 0.3 --save
-
-# Adjust NMS to reduce duplicate detections
-python src/detect.py images/input/ --iou 0.4 --save
+python -m src.main --mode both
 ```
 
-Output images with bounding boxes are saved to `images/output/`.
+- Gradio UI: http://localhost:7860
+- FastAPI Swagger UI: http://localhost:8000/docs
 
-### Test accuracy against ground truth
-
-1. Add your test images to `images/input/`
-2. Manually count persons in each image
-3. Update `data/ground_truth.json`:
-   ```json
-   {
-       "images": [
-           {"image": "photo1.jpg", "actual_count": 3},
-           {"image": "photo2.jpg", "actual_count": 5}
-       ]
-   }
-   ```
-4. Run accuracy test:
-   ```bash
-   python src/accuracy.py
-   ```
-
-### Extract frames from video
+### Run API server only
 
 ```bash
-python src/extract_frames.py
+python -m src.main --mode api
 ```
 
-Extracts frames from timelapse video in `private-data/` to `images/input/`.
+### Run Gradio UI only
+
+```bash
+python -m src.main --mode ui
+```
 
 ## Project Structure
 
 ```
 src/
-  detect.py         # Main detection script
-  accuracy.py       # Accuracy testing against ground truth
-  extract_frames.py # Video frame extraction
-  utils.py          # Image manipulation helpers
+    config.py           # Configuration (AWS region, thresholds, paths)
+    models.py           # Shared data models
+    db.py               # SQLite database layer
+    rekognition.py      # AWS Rekognition client wrapper
+    image_utils.py      # BoundingBox drawing, image degradation
+    main.py             # Entry point
 
-images/
-  input/            # Test images
-  output/           # Detection results with bounding boxes
+    api/                # FastAPI server
+        app.py          # App factory
+        routes_detect.py
+        routes_history.py
+        routes_feedback.py
+        routes_analysis.py
+        routes_stress.py
 
-data/
-  ground_truth.json # Manual counts for accuracy testing
+    ui/                 # Gradio demo UI
+        app.py          # Tab assembly
+        tab_detect.py
+        tab_history.py
+        tab_review.py
+        tab_analysis.py
+        tab_stress.py
+        tab_capabilities.py
 ```
 
-## Parameters
+## API Endpoints
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `--confidence` | 0.5 | Minimum detection confidence (0.0-1.0) |
-| `--iou` | 0.45 | NMS threshold - lower removes more duplicates |
-| `--model` | yolo11n.pt | YOLO model (n=nano, s=small, m=medium) |
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/detect` | Upload image for object detection |
+| GET | `/api/detections` | List detection history |
+| GET | `/api/detections/{id}` | Get detection detail |
+| GET | `/api/detections/{id}/annotated` | Get annotated image |
+| DELETE | `/api/detections/{id}` | Delete detection |
+| POST | `/api/feedback` | Submit label feedback |
+| GET | `/api/analysis/summary` | Get accuracy statistics |
+| POST | `/api/stress-test` | Run image degradation test |
 
-## Example Output
+## Gradio UI Tabs
 
-```
-==================================================
-Image: images/input/site1.jpg
-Persons detected: 3
-Confidence threshold: 0.5
-
-Detections:
-  Person 1: confidence=0.92, box=[120, 85, 280, 450]
-  Person 2: confidence=0.87, box=[350, 100, 480, 430]
-  Person 3: confidence=0.61, box=[500, 200, 600, 400]
-```
+1. **Detection** - Upload image, adjust confidence, see annotated results
+2. **History** - Browse past detections with filters
+3. **Review** - Per-label feedback (correct/incorrect/wrong-reason)
+4. **Analysis** - Accuracy dashboard with charts
+5. **Stress Test** - Image degradation testing
+6. **Capabilities** - Explore Rekognition's detection range
