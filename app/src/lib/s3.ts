@@ -7,8 +7,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const REGION = process.env.AWS_REGION || "ap-northeast-1";
 const BUCKET = process.env.S3_BUCKET;
-const IS_LOCAL =
-  process.env.LOCAL === "true" || process.env.NODE_ENV !== "production";
+const USE_LOCALSTACK = process.env.USE_LOCALSTACK === "true";
 
 if (!BUCKET && process.env.NODE_ENV === "production") {
   throw new Error("S3_BUCKET is required in production");
@@ -17,7 +16,7 @@ if (!BUCKET && process.env.NODE_ENV === "production") {
 const s3Client = BUCKET
   ? new S3Client({
       region: REGION,
-      ...(IS_LOCAL && {
+      ...(USE_LOCALSTACK && {
         endpoint: `http://localhost:${process.env.LOCALSTACK_HOST_PORT || "4566"}`,
         forcePathStyle: true,
         credentials: { accessKeyId: "test", secretAccessKey: "test" },

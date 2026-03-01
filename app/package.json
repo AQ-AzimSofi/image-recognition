@@ -5,7 +5,7 @@
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "dev": "tsx watch src/hono-server.ts",
+    "dev": "tsx watch --env-file=.env.development src/hono-server.ts",
     "build": "tsup",
     "typecheck": "tsc --noEmit",
     "start": "node dist/hono-server.js",
