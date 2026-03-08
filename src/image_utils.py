@@ -3,7 +3,10 @@ import colorsys
 from pathlib import Path
 
 import numpy as np
+import pillow_heif
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+
+pillow_heif.register_heif_opener()
 
 from .models import DetectedLabel, DetectedInstance
 
