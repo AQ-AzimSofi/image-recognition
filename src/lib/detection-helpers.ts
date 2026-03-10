@@ -3,7 +3,7 @@ import {
   detectionLabels,
   detections,
   stressTests,
-} from "@repo/db/models/detection";
+} from "@/db/models/detection";
 import { and, desc, eq, gte, lte, like, sql, count } from "drizzle-orm";
 
 import { useDB } from "@/lib/db-helper";
@@ -55,7 +55,7 @@ export const saveDetection = async (input: SaveDetectionInput) => {
           bboxTop: instance.boundingBox?.top ?? null,
           bboxWidth: instance.boundingBox?.width ?? null,
           bboxHeight: instance.boundingBox?.height ?? null,
-          instanceConfidence: instance.confidence,
+          instanceConfidence: instance.confidence as number | null,
         }));
       }
 
@@ -67,11 +67,11 @@ export const saveDetection = async (input: SaveDetectionInput) => {
           category: label.categories.join(", ") || null,
           parents: label.parents.join(", ") || null,
           hasBoundingBox: 0,
-          bboxLeft: null,
-          bboxTop: null,
-          bboxWidth: null,
-          bboxHeight: null,
-          instanceConfidence: null,
+          bboxLeft: null as number | null,
+          bboxTop: null as number | null,
+          bboxWidth: null as number | null,
+          bboxHeight: null as number | null,
+          instanceConfidence: null as number | null,
         },
       ];
     });

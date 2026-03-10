@@ -1,4 +1,4 @@
-import useDBFromRepo from "@repo/db/lib/db";
+import useDBFromRepo from "@/db/connection";
 import * as fs from "fs";
 
 import { logger } from "./logger";
