@@ -1,4 +1,4 @@
-export * from "./lib/db";
+export * from "./connection";
 
 export * from "./models/detection";
 export * from "./models/detection-relations";
