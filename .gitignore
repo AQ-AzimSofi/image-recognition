@@ -50,7 +50,10 @@ dist/
 .env.production
 
 # Drizzle
-db/migrations/
+migrations/
+
+# Dashboard saved results
+results/
 
 # Misc
 /private
