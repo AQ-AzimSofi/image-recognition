@@ -2,7 +2,7 @@
 
 Comparison of all available technologies for image object detection, covering managed APIs, local models, and custom training platforms.
 
-> **Context**: This project uses AWS Rekognition DetectLabels for object detection. Rekognition's fixed label vocabulary (~3,000 categories) and weak support for region-specific products (e.g. Japanese household items) has led to accuracy issues. This document evaluates alternatives.
+> **Context**: This project uses AWS Rekognition DetectLabels for object detection. Rekognition's fixed label vocabulary (~3,000 categories) and weak support for specific product identification has led to accuracy issues. This document evaluates alternatives.
 
 ---
 
@@ -81,10 +81,10 @@ These use large language models with vision capabilities. They understand contex
 | **Bounding boxes** | No native structured output. Can describe locations in text but not pixel-accurate boxes |
 | **Cost** | Haiku 3.5: ~$0.001/image, Sonnet 4.6: ~$0.003/image, Opus 4.6: ~$0.005/image |
 | **Free tier** | Small initial API credits |
-| **Accuracy** | High -- understands context, reads Japanese text, identifies specific products ("Meiji milk", "DAIKIN remote") |
+| **Accuracy** | High -- understands context, reads text on labels, identifies specific products and brands |
 | **Data used for training** | No -- API data is not used for training |
 | **Batch discount** | 50% off with batch API (results within 24 hours) |
-| **Strengths** | Best contextual understanding, reads text/brands on products, handles Japanese well, structured JSON output via prompting |
+| **Strengths** | Best contextual understanding, reads text/brands on products, strong multilingual support, structured JSON output via prompting |
 | **Weaknesses** | No bounding boxes, higher cost than traditional vision APIs, slower response |
 
 #### Amazon Bedrock (Claude)
@@ -111,7 +111,7 @@ These use large language models with vision capabilities. They understand contex
 | **Accuracy** | High -- similar contextual understanding to Claude |
 | **Data used for training** | No -- API data not used for training by default |
 | **Strengths** | Strong general vision, good at OCR, wide ecosystem |
-| **Weaknesses** | No bounding boxes, Japanese understanding slightly behind Claude |
+| **Weaknesses** | No bounding boxes, contextual understanding slightly behind Claude |
 
 #### Google Gemini API
 
@@ -124,7 +124,7 @@ These use large language models with vision capabilities. They understand contex
 | **Accuracy** | Medium-high -- good contextual understanding, competitive with Claude/GPT |
 | **Data used for training** | Free tier: may be used for product improvement. Paid tier (Vertex AI): not used |
 | **Strengths** | Cheapest LLM option by far, generous free tier, fast |
-| **Weaknesses** | Free tier data may be used for training, Japanese understanding slightly weaker, no structured bounding boxes |
+| **Weaknesses** | Free tier data may be used for training, contextual understanding slightly weaker, no structured bounding boxes |
 
 ### 1.3 Specialized Detection APIs
 
@@ -324,7 +324,7 @@ Train your own model on your own labeled data. Highest accuracy for specific use
 
 ## 4. Feature Comparison Matrix
 
-| Technology | Type | Bounding Boxes | Context-Aware | Cost/Image | Data Used for Training | Japanese Product ID |
+| Technology | Type | Bounding Boxes | Context-Aware | Cost/Image | Data Used for Training | Product ID Accuracy |
 |-----------|------|:--------------:|:-------------:|------------|:---------------------:|:-------------------:|
 | AWS Rekognition | API | Yes | No | $0.001 | No | Poor |
 | Google Cloud Vision | API | Yes (Object Localization) | No | $0.002 | No | Poor |

@@ -29,10 +29,8 @@ Verify these are installed (fail with a clear message if any are missing):
    npm install
    ```
 
-3. **Configure environment**: Check if `app/.env.development` exists. If not, create it from this template:
+3. **Configure environment**: Check if `.env.development` exists at the project root. If not, create it from this template:
    ```
-   LOCAL=true
-   PORT=4111
    DB_HOST=localhost
    DB_PORT=5432
    DB_NAME=detection_db
@@ -40,21 +38,18 @@ Verify these are installed (fail with a clear message if any are missing):
    DB_PASSWORD=password
    AWS_REGION=ap-northeast-1
    S3_BUCKET=
+   PORT=4111
    ```
-   Then ask the user for their S3 bucket name and fill it in. Also check if `db/.env.development` exists and create it if needed with the DB credentials.
+   Then ask the user for their S3 bucket name and fill it in.
 
-4. **Run database migration**:
+4. **Push database schema**:
    ```
-   cd db && npx drizzle-kit generate
-   ```
-   Then apply the latest migration SQL:
-   ```
-   docker exec -i detection-db psql -U postgres -d detection_db < db/migrations/<latest>.sql
+   npm run db:push
    ```
 
 5. **Verify**: Start the server and hit the health endpoint:
    ```
-   cd app && npx tsx --env-file=.env.development src/hono-server.ts
+   npm run dev
    ```
    Then `curl http://localhost:4111/health` to confirm `{"status":"ok"}`.
    After verification, stop the server.

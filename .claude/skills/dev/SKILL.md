@@ -26,7 +26,7 @@ Before starting, check:
 
 2. **Start the Hono server** (if not already running on port 4111):
    ```
-   cd app && npx tsx --env-file=.env.development src/hono-server.ts
+   npm run dev
    ```
    Run this in the background.
 
