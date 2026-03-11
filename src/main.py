@@ -1,8 +1,14 @@
 import argparse
+import logging
 
 from .config import DEFAULT_CONFIG, ensure_directories
 from .db import Database
 from .rekognition import RekognitionClient
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
+)
 
 
 def run_api(db, client):
